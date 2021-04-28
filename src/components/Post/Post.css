@@ -1,0 +1,18 @@
+.Post{
+    color: black;
+}
+.Post:hover,
+.Post:active {
+    color: orange;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a{
+    color: black;
+}
+
+.Author {
+    margin: 16px 0;
+    color: #ccc;
+}
