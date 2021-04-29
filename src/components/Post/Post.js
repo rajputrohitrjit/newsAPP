@@ -6,8 +6,7 @@ import {
   } from 'reactstrap';
 const post = (props) => {
     return (
-      
-      <Card className="article" key={props.key}>
+      <Card key={props.index} style={{ paddingTop:'0px'}} >
         <CardImg top width="100%" src={props.src}/>
         <CardBody>
           <CardTitle tag="h5" className="Post">

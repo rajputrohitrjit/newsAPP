@@ -1,19 +1,16 @@
 import React  from 'react';
-import {
-    Navbar,
-    NavbarBrand
-  } from 'reactstrap';
+import logo from '../../assets/logo.png';
+import './Header.css';
 
 const Header = () =>
 {
     return (
-      <div>
-          <h1 style={{textAlign:'center', color:'black'}}>NewsApp</h1>
-        <Navbar color="light" light expand="md">
-        
-          <NavbarBrand href="/">newsAPP</NavbarBrand>
-        </Navbar>
+      <nav>
+        <div>
+      <img src={logo} href="/" alt="logo" className="logo" />
       </div>
+      </nav>
+ 
     );
   }
 export default Header;

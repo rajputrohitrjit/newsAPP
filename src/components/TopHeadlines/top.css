@@ -1,0 +1,16 @@
+.topHeadlines{
+    margin-left: 0px;  
+    margin-top: 3px;
+    margin-bottom : 3px ;
+}
+
+@media (min-width:398px) {
+    .topHeadlines {
+        margin-left: 15px;
+    }
+}
+@media (min-width:800px) {
+    .topHeadlines {
+        margin-left: 15px;
+    }
+}
