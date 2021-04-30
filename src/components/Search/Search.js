@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './Search.css';
-import {Button, Form, Input, Alert} from 'reactstrap';
+import {Button, Form, Input} from 'reactstrap';
 
 class Search extends Component{
 
@@ -29,8 +29,8 @@ class Search extends Component{
   render()
   {
     return(
-      <div style={{ margin:'auto ', width:'45%', padding:'10px'}}>
-      <Alert color="dark">Search any topic, news, blog....</Alert>
+      <div className="search">
+      <p className="text-center font-italic position-static font-weight-bold" >Search any topic, news, blog....</p>
       <Form onSubmit={this.handleSubmit} inline style={{marginLeft:'auto', marginRight:'auto'}}>
         <Input className="topHeadlines"
               type="text"

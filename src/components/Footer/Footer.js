@@ -4,9 +4,10 @@ import './footer.css';
 const footer = () =>
 {
     return (
-    <footer>
-        <h1>Created by React</h1>
-    </footer>
+        <div className="footer">
+        <h1 className="text-center">Created by React</h1>
+        
+        </div>
     );
 }
 

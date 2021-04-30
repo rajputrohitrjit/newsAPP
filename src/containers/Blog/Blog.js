@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Post from '../../components/Post/Post';
 import './Blog.css';
 import axios from '../../axios';
-import { CardColumns} from 'reactstrap';
+import { CardColumns, Spinner} from 'reactstrap';
 import {NEWS_API_KEY} from '../../config';
 import Search from '../../components/Search/Search';
 import Business from '../../components/TopHeadlines/business';
@@ -20,13 +20,13 @@ class Blog extends Component {
         post: [],
         searchTopic: null,
         loading : false,
-        totalResults : null
+        totalResults : 0
     }
         componentDidMount(){
             try{
             axios.get(`/top-headlines?country=in&apiKey=${NEWS_API_KEY}`)
             .then(response => {
-                this.setState({post:response.data.articles, totalResults:null})
+                this.setState({post:response.data.articles, totalResults:response.data.totalResults})
             })
             .catch(error => {
                 console.log(error);
@@ -52,21 +52,19 @@ class Blog extends Component {
         } catch (error) {
           console.log(error);
         }
-        this.setState({loading:false});
+        this.setState({totalResults:0});
       };
 
       searchForTopicWithoutDate = (topic) => {
-        try {
+ 
            axios.get(`/top-headlines?category=${topic}&language=en&country=in&apiKey=${NEWS_API_KEY}`)
           .then(response => {
-              this.setState({post:response.data.articles,totalResults:null});
+              this.setState({post:response.data.articles,totalResults:response.data.totalResults});
           })
           .catch(error => {
               console.log(error);
           });   
-        } catch (error) {
-          console.log(error);
-        }
+          this.setState({totalResults:0});
       };
 
     render () {
@@ -81,8 +79,10 @@ class Blog extends Component {
         return (
             <React.Fragment>
             <Search searchForTopic={this.searchForTopic}/>
-            {this.state.totalResults ?  <h4 className="text-center">
-            Found {this.state.totalResults} articles on this topic</h4>:null}
+{/* 
+            { this.state.totalResults  ?  <h4 className="text-center">
+            Found {this.state.totalResults} articles on this topic</h4>:null} */}
+
             <div className="row"  
             style={{margin:'auto', width:'50%', padding:'20px'}}>
             <Business searchForTopicWithoutDate={this.searchForTopicWithoutDate}/>
@@ -92,15 +92,14 @@ class Blog extends Component {
             <Sports searchForTopicWithoutDate={this.searchForTopicWithoutDate}/>
             <Technology searchForTopicWithoutDate={this.searchForTopicWithoutDate}/>
             </div>
-
-            {/* {
-                loading && <Spinner color="primary" style={{marginLeft:'auto', marginRight:'auto', display:'block'}}>
-                </Spinner>
-            } */}
                 
-             {fullLoaded}
-              
-    
+             {this.state.totalResults ? fullLoaded : 
+             <Spinner  color="success" 
+             style={{marginLeft:'auto', marginRight:'auto', display:'block', width: '3rem', height: '3rem' }}>
+                </Spinner>
+            }
+            
+            
             </React.Fragment>
             )
         }
