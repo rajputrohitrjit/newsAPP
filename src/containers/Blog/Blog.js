@@ -19,11 +19,9 @@ class Blog extends Component {
     state = {
         post: [],
         searchTopic: null,
-        loading : false,
         totalResults : 0
     }
         componentDidMount(){
-            try{
             axios.get(`/top-headlines?country=in&apiKey=${NEWS_API_KEY}`)
             .then(response => {
                 this.setState({post:response.data.articles, totalResults:response.data.totalResults})
@@ -31,16 +29,9 @@ class Blog extends Component {
             .catch(error => {
                 console.log(error);
             });          
-                        
-            }
-            catch{
-
-            }
     }
 
     searchForTopic = (topic,date) => {
-        try {
-            this.setState({loading:true});
            axios.get(`/everything?q=${topic}&from=${date}&sortBy=publishedAt&pageSize=25&language=en&apiKey=${NEWS_API_KEY}`)
           .then(response => {
               this.setState({post:response.data.articles,totalResults:response.data.totalResults});
@@ -49,9 +40,6 @@ class Blog extends Component {
           .catch(error => {
               console.log(error);
           });   
-        } catch (error) {
-          console.log(error);
-        }
         this.setState({totalResults:0});
       };
 
@@ -72,7 +60,8 @@ class Blog extends Component {
      
         const fullLoaded =( <CardColumns style={{padding:'50px', paddingTop:'0px'}}>
         {this.state.post.map( (post,index) => 
-        <Post title={post.title} content={post.content} src={post.urlToImage} key={index} url={post.url}/>
+        <Post title={post.title} content={post.content} src={post.urlToImage} 
+        key={index} url={post.url} source={post.source.name} publishedAt={post.publishedAt}/>
         )}
         </CardColumns> );
 

@@ -5,7 +5,7 @@ import {Button, Form, Input} from 'reactstrap';
 class Search extends Component{
 
   state = {
-    searchTopic :" ",
+    searchTopic :"",
     date : ""
   }
 
